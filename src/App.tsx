@@ -16,7 +16,7 @@ const App: React.FC = () => {
   const [score, setScore] = useState(0);
   const [standings, setStandings] = useState<any[]>([]);
   const [pendingResults, setPendingResults] = useState(false);
-  const [musicBlocked, setMusicBlocked] = useState(false);
+  const [musicBlocked, setMusicBlocked] = useState(true);
   const audioRef = React.useRef<HTMLAudioElement>(null);
   // Only English UI
 
@@ -39,8 +39,14 @@ const App: React.FC = () => {
         preload="auto"
         style={{ display: "none" }}
         id="bg-music"
+        onCanPlay={() => {
+          // Try to play automatically
+          if (audioRef.current && musicBlocked) {
+            audioRef.current.play().then(() => setMusicBlocked(false)).catch(() => setMusicBlocked(true));
+          }
+        }}
         onPlay={() => setMusicBlocked(false)}
-        onError={() => setMusicBlocked(true)}
+        onPause={() => setMusicBlocked(true)}
       />
       {musicBlocked && (
         <button
@@ -51,7 +57,7 @@ const App: React.FC = () => {
           }}
           className="absolute top-8 left-1/2 -translate-x-1/2 z-50 px-8 py-4 text-lg pixel-font bg-gradient-to-br from-neonPurple via-neonCyan to-white text-black shadow-[0_0_32px_8px_#06b6d4,0_0_64px_16px_#a855f7] border-4 border-neonCyan rounded-xl hover:scale-105 hover:shadow-[0_0_64px_16px_#06b6d4,0_0_128px_32px_#a855f7] transition-all duration-150"
         >
-          ▶ Play Music
+𓁿⠀ 
         </button>
       )}
       <Starfield />
