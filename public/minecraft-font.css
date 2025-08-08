@@ -1,0 +1,9 @@
+@font-face {
+  font-family: 'Minecraft';
+  src: url('./Minecraft.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+.minecraft-font, .pixel-font {
+  font-family: 'Minecraft', 'Press Start 2P', monospace !important;
+}
